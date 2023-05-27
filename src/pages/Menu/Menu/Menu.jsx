@@ -5,6 +5,7 @@ import imgbg1 from '../../../assets/menu/banner3.jpg'
 import imgbg2 from '../../../assets/menu/dessert-bg.jpeg'
 import imgbg3 from '../../../assets/menu/pizza-bg.jpg'
 import imgbg4 from '../../../assets/menu/salad-bg.jpg'
+import imgbg5 from '../../../assets/menu/soup-bg.jpg'
 import useMenu from '../../../hooks/useMenu';
 import SectionTitle from '../../../componements/SectionTitle/SectionTitle';
 import MenuCategory from '../MenuCategory/MenuCategory';
@@ -15,6 +16,7 @@ const Menu = () => {
     const pizzas = menu.filter(item => item.category === 'pizza')
     const salads = menu.filter(item => item.category === 'salad')
     const offeres = menu.filter(item => item.category === 'offered')
+    const soup = menu.filter(item => item.category === 'soup')
 
     return (
         <div>
@@ -40,21 +42,27 @@ const Menu = () => {
             <MenuCategory
                 items={desserts}
                 bg_img={imgbg2}
-                title='Our Desserts'
+                title='dessert'
                 seronam='Would you like to a deish?'
             ></MenuCategory>
             {/* pizzas menu items  */}
             <MenuCategory
                 items={pizzas}
                 bg_img={imgbg3}
-                title='Our pizzas'
+                title='pizza'
                 seronam='Would you like to a deish?'
             ></MenuCategory>
             {/* salads menu items  */}
             <MenuCategory
-                items={salads}
+                items={soup}
                 bg_img={imgbg4}
-                title='Our salads'
+                title='soup'
+                seronam='Would you like to a deish?'
+            ></MenuCategory>
+            <MenuCategory
+                items={salads}
+                bg_img={imgbg5}
+                title='salad'
                 seronam='Would you like to a deish?'
             ></MenuCategory>
 
