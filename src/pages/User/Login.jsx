@@ -1,22 +1,26 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../assets/others/cupcake.gif'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
 
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/";
+     console.log('Login page location: ', location);
+     console.log(location.state?.from?.pathname);
     const {signIn} = useContext(AuthContext)
 
-    const capterRef = useRef(null)  
+    // const capterRef = useRef(null)  
     const [disabled, setDisable] = useState(true)
     useEffect( ()=>{
         loadCaptchaEnginge(6); 
     } , [])
 
-    const handelCapter = () =>{
-        const user_captcha_value = capterRef.current.value;
+    const handelCapter = (e) =>{
+        const user_captcha_value = e.target.value;
         // console.log(user_captcha_value);
         if (validateCaptcha(user_captcha_value)==true) {
             alert('Captcha Matched');
@@ -40,7 +44,8 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
-            navigate('/')
+            // navigate('/')
+            navigate(from, { replace: true });
 
         })
         .catch(error => console.log(error));
@@ -72,15 +77,14 @@ const Login = () => {
                                 <label className="label">
                                  <LoadCanvasTemplate />
                                 </label>
-                                <input type="text" ref={capterRef} name='captchar' placeholder="Type the captchar" className="input input-bordered" />
-                                <button onClick={handelCapter} className='btn btn-outline btn-xs mt-2'>Validate</button>
+                                <input onBlur={handelCapter} type="text" name='captchar' placeholder="Type the captchar" className="input input-bordered" />
                             </div>
 
                             <div className="form-control mt-6">
                                 <input disabled={disabled} className="btn btn-primary" type='submit' value='Login'></input>
                             </div>
                         </form>
-                        <p className='my-3 text=center'>New to Car Doctors <Link className='text-orange-500 font-bold' to="/register">Sing Up</Link></p>
+                        <p className='my-3 text=center'>Create a Accoutn Plz..<Link className='text-orange-500 font-bold' to="/register">Sing Up</Link></p>
                     </div>
                 </div>
                 <div className="w-1/2 mr-12">

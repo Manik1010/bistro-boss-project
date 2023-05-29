@@ -1,14 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaCartArrowDown } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const NavBar = () => {
+    // for cart
+    const [cart] = useCart();
     // const navigate = useNavigate()
-    const {user, logOut} = useContext(AuthContext)
-    const handelLogOut = () =>{
+    const { user, logOut } = useContext(AuthContext)
+    const handelLogOut = () => {
         logOut()
-        .then(() =>{})
-        .catch(error => console.log(error))
+            .then(() => { })
+            .catch(error => console.log(error))
     }
     const nabOption = <>
         <li><Link to='/'>Home</Link></li>
@@ -16,10 +20,21 @@ const NavBar = () => {
         <li><Link to='/order/salad'>Order</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-        
+        <li>
+            <Link to='/dashboard/mycart'>
+                <button className="btn gap-2">
+                <FaCartArrowDown></FaCartArrowDown>
+                    <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                </button>
+            </Link>
+        </li>
+
         {
-            user ? <><button onClick={handelLogOut} className="btn btn-ghost"> LogOut</button></> 
-            : <><li><Link to='/login'>Login</Link></li></>
+            user ? <>
+                <button onClick={handelLogOut} className="btn btn-ghost"> LogOut</button>
+                {/* navigate('/') */}
+            </>
+                : <><li><Link to='/login'>Login</Link></li></>
         }
     </>
     return (
@@ -41,7 +56,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                
+
                 <a className="btn">Get started</a>
             </div>
         </div>

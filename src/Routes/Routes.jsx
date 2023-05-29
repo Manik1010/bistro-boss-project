@@ -5,6 +5,10 @@ import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/Order/Order/Order";
 import Login from "../pages/User/Login";
 import Registation from "../pages/User/Registation";
+import PrivateRoute from "../providers/PrivateRoute";
+import About from "../pages/About/About";
+import Deshboard from "../Layout/Deshboard";
+import MyCart from "../pages/Dashboard/MyCart/MyCart";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +27,14 @@ export const router = createBrowserRouter([
                 path: 'order/:category',
                 element: <Order></Order>
             },
+            // {
+            //     path: 'order/:category',
+            //     element: <PrivateRoute><Order></Order></PrivateRoute>
+            // },
+            {
+                path: 'about',
+                element: <PrivateRoute><About></About></PrivateRoute>
+            },
             {
                 path: 'login',
                 element: <Login></Login>
@@ -30,6 +42,16 @@ export const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Registation></Registation>
+            }
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <Deshboard></Deshboard>,
+        children: [
+            {
+                path: 'mycart',
+                element: <MyCart></MyCart>
             }
         ]
     },
