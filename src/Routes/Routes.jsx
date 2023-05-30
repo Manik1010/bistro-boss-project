@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: 'mycart',
-                element: <MyCart></MyCart>
+                element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
             }
         ]
     },

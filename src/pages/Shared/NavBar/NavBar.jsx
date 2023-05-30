@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
@@ -15,18 +15,18 @@ const NavBar = () => {
             .catch(error => console.log(error))
     }
     const nabOption = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/menu'>Our Menu</Link></li>
-        <li><Link to='/order/salad'>Order</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/order/salad'>Order</NavLink></li>
+        <li><NavLink to='/about'>About</NavLink></li>
+        <li><NavLink to='/blog'>Blog</NavLink></li>
         <li>
-            <Link to='/dashboard/mycart'>
+            <NavLink to='/dashboard/mycart'>
                 <button className="btn gap-2">
                 <FaCartArrowDown></FaCartArrowDown>
                     <div className="badge badge-secondary">+{cart?.length || 0}</div>
                 </button>
-            </Link>
+            </NavLink>
         </li>
 
         {
@@ -34,7 +34,7 @@ const NavBar = () => {
                 <button onClick={handelLogOut} className="btn btn-ghost"> LogOut</button>
                 {/* navigate('/') */}
             </>
-                : <><li><Link to='/login'>Login</Link></li></>
+                : <><li><NavLink to='/login'>Login</NavLink></li></>
         }
     </>
     return (
