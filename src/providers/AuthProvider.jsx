@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext()
 // Initialize Firebase Authentication and get a reference to the service
@@ -10,6 +11,8 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    const googleProvider = new GoogleAuthProvider();
+
     const createUser = (email, pass) =>{
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, pass);
@@ -17,6 +20,15 @@ const AuthProvider = ({children}) => {
     const signIn = (email, pass) =>{
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, pass)
+    }
+    const googleSignIn = () =>{
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        });
     }
     const logOut =() =>{
         setLoading(true);
@@ -26,7 +38,19 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             console.log('Current User: ', currentUser)
-            setLoading(false)
+            //get and send tooken..
+            if(currentUser){
+                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
+                .then(data =>{
+                    // console.log(data.data.token)
+                    localStorage.setItem('access-token', data.data.token)
+                    setLoading(false);
+                })
+            }
+            else{
+                localStorage.removeItem('access-token')
+            }
+            
           });
           return() =>{
             return unsubscribe();
@@ -37,6 +61,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signIn,
+        googleSignIn,
+        updateUserProfile,
         logOut
     }
     return (
