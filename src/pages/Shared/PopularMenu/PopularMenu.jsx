@@ -1,5 +1,5 @@
 import SectionTitle from "../../../componements/SectionTitle/SectionTitle";
-import MenuItem from "../MenuItem/MenuItem";
+// import MenuItem from "../MenuItem/MenuItem";
 import useMenu from "../../../hooks/useMenu";
 import MenuCategory from "../../Menu/MenuCategory/MenuCategory";
 

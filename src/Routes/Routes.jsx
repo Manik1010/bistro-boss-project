@@ -15,6 +15,7 @@ import ManageItem from "../pages/Dashboard/ManageItem/ManageItem";
 import Edit from "../pages/Dashboard/ManageItem/Edit";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import ManageBooking from "../pages/Dashboard/ManageBooking/ManageBooking";
 
 export const router = createBrowserRouter([
     {
@@ -73,9 +74,15 @@ export const router = createBrowserRouter([
             }
             ,
             {
+                path: 'manageBooking',
+                element: <ManageBooking></ManageBooking>
+            }
+            ,
+            {
                 path: 'edit/:_id',
                 element: <Edit></Edit>,
-                loader: ({params}) => fetch(`http://localhost:5000/menu/${params._id}`)
+                // loader: ({params}) => fetch(`http://localhost:5000/menu/${params._id}`)
+                loader: ({params}) => fetch(`https://bistro-boss-server-sandy.vercel.app/menu/${params._id}`)
             },
             {
                 path: 'home',
