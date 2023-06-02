@@ -16,6 +16,7 @@ import Edit from "../pages/Dashboard/ManageItem/Edit";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import ManageBooking from "../pages/Dashboard/ManageBooking/ManageBooking";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -66,11 +67,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'addItem',
-                element: <AddItem></AddItem>
+                element: <AdminRoute><AddItem></AddItem></AdminRoute>
             },
             {
                 path: 'manageItem',
-                element: <ManageItem></ManageItem>
+                element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
             }
             ,
             {

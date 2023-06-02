@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 
 
-const Table = ({ menu, handelDeleteMenu }) => {
+const Table = ({ menu, handelDeleteMenu, index}) => {
     // console.log(menu)
     const { category, name, price, image, _id } = menu || {}
     // console.log(_id)
+    
     return (
         <tbody>
             {/* row 1 */}
             <tr>
+                 <td>
+                    {index+1}
+                </td>
                 <td>
                     <div className="flex items-center space-x-3">
                         <div className="avatar">
@@ -21,7 +25,7 @@ const Table = ({ menu, handelDeleteMenu }) => {
                 <td>
                     {name}
                 </td>
-                <td>{price}</td>
+                <td className="text-right">{price}</td>
                 <td> {category}</td>
 
                 <th>
