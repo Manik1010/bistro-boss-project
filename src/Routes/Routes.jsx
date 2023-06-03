@@ -17,6 +17,7 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import ManageBooking from "../pages/Dashboard/ManageBooking/ManageBooking";
 import AdminRoute from "./AdminRoute";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
             {
                 path: 'myhome',
                 element: <UserHome></UserHome>
+            },
+            {
+                path: 'payment',
+                element: <Payment></Payment>
             }
         ]
     },
