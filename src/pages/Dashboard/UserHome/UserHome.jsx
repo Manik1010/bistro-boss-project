@@ -1,8 +1,9 @@
 
+
 const UserHome = () => {
     return (
         <div>
-            UserHome..........
+            <h2>Regular user home</h2>
         </div>
     );
 };
